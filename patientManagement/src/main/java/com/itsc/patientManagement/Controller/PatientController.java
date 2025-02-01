@@ -37,5 +37,17 @@ public class PatientController {
 
         return "redirect:/patients";
     }
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Patient patient = patientService.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "patient-form";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient) {
+        patientService.updatePatient(patient.getId(), patient);
+        return "redirect:/patients";
+    }
 
 }

@@ -55,9 +55,11 @@ public class SecurityConfig {
 
                 })
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/req/signup", "/style.css", "/signup.js").permitAll();
+                    registry.requestMatchers("/req/signup", "/style.css", "/signup.js", "/logout").permitAll();
                     registry.anyRequest().authenticated();
                 })
+                .logout(config -> config
+                        .logoutSuccessUrl("/login"))
                 .build();
     }
 }
